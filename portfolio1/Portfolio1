@@ -1,0 +1,35 @@
+#!/bin/bash
+#Name: Tyler Chin
+#Student Number: 10496651
+echo "Welcome to the age guess"
+#Generates the random age, range 18-90 and stores it
+guess=$(shuf -i 18-90 -n 1) 
+#echos the guess for testing purposes
+echo "$guess"
+read -p "Write your guess as a number. The age is between 18 and 90: " answer
+#echos the input for testing purposes
+#echo $answer
+#Loops until the person gets the age correct
+until (($guess == $answer)); do
+    #Check for answer containing integer, =~ compares variable on left to indenfinte size on right
+    #[0-9] is the intergers
+    if [[ $answer =~ ^-?[0-9]+$ ]]; then 
+        #If for if the guess is lower
+        if (($answer < $guess)); then
+            echo "That guess was lower than the age" 
+            read -p "Write your guess as a number. The age is between 18 and 90: " answer
+            fi
+        #IF for the guess being higher
+        if (($answer > $guess)); then
+            echo "That guess was higher than the age"
+            read -p "Write your guess as a number. The age is between 18 and 90: " answer
+            fi
+    #For when input is a non-integer
+    else
+        echo "That was an invalid answer"
+        read -p "Please write your guess as a whole number, Integer form: " answer
+        fi    
+done
+echo "Congrulations, You've guessed correctly"
+exit 0
+done
